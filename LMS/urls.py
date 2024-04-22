@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from . import views
+from . import views,user_login
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,8 +26,9 @@ urlpatterns = [
     path('single/course/',views.Single_Course,name="course"),
     path('about_us/',views.About_Us,name="about_us"),
     path('contact_us/',views.Contact_Us,name="contact_us"),
+    path('accounts/register/',user_login.Register,name = "register"),
     path('accounts/', include('django.contrib.auth.urls')),
-    
+    path('dologin',user_login.DoLogin,name="dologin"),
     
     
 ]

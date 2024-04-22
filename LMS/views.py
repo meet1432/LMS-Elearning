@@ -1,9 +1,10 @@
 from django.shortcuts import redirect,render
-
+from django.contrib.auth.decorators import login_required
 
 def Base(request):
     return render(request, 'base.html')
 
+@login_required
 def Home(request):
     return render(request, 'Main/home.html')
 
