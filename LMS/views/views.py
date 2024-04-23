@@ -8,6 +8,7 @@ def Base(request):
 def Home(request):
     return render(request, 'Main/home.html')
 
+@login_required
 def Single_Course(request):
     return render(request, 'Main/single_course.html')
 
