@@ -20,6 +20,7 @@ def Register(request):
            messages.warning(request,'Username are Already exists !')
            return redirect('register')
         
+        #create user
         user = User(username=username,email=email)
         user.set_password(password)
         user.save()
@@ -34,7 +35,7 @@ def DoLogin(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         
-        user = authenticate(request,username=email,password=password)
+        user = EmailBackEnd.authenticate(request,username=email,password=password)
         if user != None:
            login(request,user)
            messages.success(request,'Login Successfully !')

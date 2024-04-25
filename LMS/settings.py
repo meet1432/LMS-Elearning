@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-2wgvkwysd#a2!h_c7kfl21*cl5mgd77_i4%r8mpk4c#eqq19a@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -124,6 +124,9 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'LMS/static'),
 ]
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
@@ -136,5 +139,5 @@ LOGOUT_REDIRECT_URL = 'login'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'meet.patel@gmail.com'
-EMAIL_HOST_PASSWORD = 'Drc@1234'
+EMAIL_HOST_USER = 'meet.patel@drcsystems.com'
+EMAIL_HOST_PASSWORD = 'Drc@12345'

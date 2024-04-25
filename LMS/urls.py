@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from LMS.views import views,user_login
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,9 +29,9 @@ urlpatterns = [
     path('contact_us/',views.Contact_Us,name="contact_us"),
     path('accounts/register/',user_login.Register,name = "register"),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('dologin/',user_login.DoLogin,name="dologin"),
+    path('accounts/login',user_login.DoLogin,name="dologin"),
     path('accounts/logout/',user_login.Logout,name="logout"),
     path('accounts/profile/',user_login.Profile,name="profile"),
     path('accounts/profile/update',user_login.Profile_update,name="profile_update"),
     
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

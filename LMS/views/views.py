@@ -1,12 +1,21 @@
 from django.shortcuts import redirect,render
 from django.contrib.auth.decorators import login_required
+from app.models import *
 
 def Base(request):
     return render(request, 'base.html')
 
 @login_required
 def Home(request):
-    return render(request, 'Main/home.html')
+    category = Categories.objects.all().order_by('id')[0:5]
+    course = Course.objects.filter(status = 'PUBLISH').order_by('-id')
+    
+    context = {
+        'category': category,
+        'course': course,
+    }
+
+    return render(request, 'Main/home.html', context)
 
 @login_required
 def Single_Course(request):
