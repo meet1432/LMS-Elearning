@@ -8,6 +8,9 @@ class Categories(models.Model):
     def __str__(self):
         return self.name
     
+    def get_all_category(self):
+        return Categories.objects.all().order_by('id')
+    
 class Author(models.Model):
     author_profile = models.ImageField(upload_to="author")
     name = models.CharField(max_length=100, null=True)
@@ -34,6 +37,13 @@ class Course(models.Model):
     slug = models.SlugField(default='', max_length=500, null=True, blank=True)
     status = models.CharField(choices=STATUS,max_length=100,null=True)
 
+    def get_current_price(self,price,discount):
+        self.discount = discount
+        self.price = price
+        if self.discount is None or self.discount is 0:
+            return self.price 
+        else:
+            return self.price - (self.price * (self.discount/100))
 
     def __str__(self):
         return self.title

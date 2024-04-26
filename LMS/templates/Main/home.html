@@ -2,6 +2,7 @@
 {% load static%}
 
 {% block content%}
+{% load course_tag %}
 <!-- HERO
     ================================================== -->
 <section class="py-13 pt-xl-14 mt-n13 pb-lg-12 bg-cover position-relative"
@@ -198,8 +199,8 @@
                                         </div>
 
                                         <div class="col-auto px-2 text-right">
-                                            <del class="font-size-sm">₹ 959</del>
-                                            <ins class="h4 mb-0 d-block mb-lg-n1">₹ {{i.price}}</ins>
+                                            <del class="font-size-sm">₹ {{i.price}}</del>
+                                            <ins class="h4 mb-0 d-block mb-lg-n1">₹ {% get_discount_price i.price i.discount%}</ins>
                                         </div>
                                     </div>
                                 </div>
@@ -339,8 +340,8 @@
                                         </div>
 
                                         <div class="col-auto px-2 text-right">
-                                            <del class="font-size-sm">₹ 959</del>
-                                            <ins class="h4 mb-0 d-block mb-lg-n1">₹ {{i.price}}</ins>
+                                            <del class="font-size-sm">₹ {{i.price}}</del>
+                                            <ins class="h4 mb-0 d-block mb-lg-n1">₹ {% get_discount_price i.price i.discount %}</ins>
                                         </div>
                                     </div>
                                 </div>

@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/',views.Base,name="base"),
     path('',views.Home,name="home"),
-    path('single/course/',views.Single_Course,name="course"),
+    path('courses/',views.Single_Course,name="course"),
     path('about_us/',views.About_Us,name="about_us"),
     path('contact_us/',views.Contact_Us,name="contact_us"),
     path('accounts/register/',user_login.Register,name = "register"),

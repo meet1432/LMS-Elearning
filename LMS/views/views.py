@@ -19,7 +19,12 @@ def Home(request):
 
 @login_required
 def Single_Course(request):
-    return render(request, 'Main/single_course.html')
+    category = Categories.get_all_category(Categories)
+
+    context = {
+        'category': category,
+    }
+    return render(request, 'Main/single_course.html',context)
 
 def About_Us(request):
     return render(request, 'Main/about_us.html')

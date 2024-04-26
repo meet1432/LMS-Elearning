@@ -6,7 +6,7 @@
     ================================================== -->
     <header class="py-8 py-md-11" style="background-image: none;">
         <div class="container text-center py-xl-2">
-            <h1 class="display-4 fw-semi-bold mb-0">Courses Grid 02</h1>
+            <h1 class="display-4 fw-semi-bold mb-0">Courses</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-scroll justify-content-center">
                     <li class="breadcrumb-item">
@@ -15,7 +15,7 @@
                         </a>
                     </li>
                     <li class="breadcrumb-item text-gray-800 active" aria-current="page">
-                        Courses Grid 02
+                        Courses
                     </li>
                 </ol>
             </nav>
@@ -75,35 +75,16 @@
                                 </button>
                             </h4>
                         </div>
-
+                        {% for i in category%}
                         <div id="coursefiltercollapse1" class="collapse show mt-n2 px-6 pb-6" aria-labelledby="coursefilter1" data-parent="#courseSidebar">
                             <ul class="list-unstyled list-group list-checkbox">
                                 <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheckone">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheckone">Art (8)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck2">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck2">Exercise (8)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck3">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck3">Material Design (7)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck4">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck4">Software Development (6)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck5">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck5">Music (6)</label>
-                                </li>
-                                <li class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="categorycustomcheck6">
-                                    <label class="custom-control-label font-size-base" for="categorycustomcheck6">Photography (6)</label>
+                                    <input type="checkbox" class="custom-control-input" id="category-{{i.id}}">
+                                    <label class="custom-control-label font-size-base" for="category-{{i.id}}">{{i.name}}({{i.course_set.all.count}})</label>
                                 </li>
                             </ul>
                         </div>
+                        {% endfor %}
                     </div>
 
                     <div class="border rounded mb-6 @@widgetBG">
