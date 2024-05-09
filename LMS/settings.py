@@ -82,6 +82,17 @@ DATABASES = {
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER': 'postgres',
+#         'PASSWORD': 'CmNXFBMXWKMdTeuqYSFcvUMdKzmHqYnZ',
+#         'HOST': 'roundhouse.proxy.rlwy.net',
+#         'PORT': '10988',
+#     }
+# }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -122,7 +133,7 @@ STATIC_ROOT = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'LMS/static'),
-]
+]   
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

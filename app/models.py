@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.text import slugify
+from django.db.models.signals import pre_save
 
 # Create your models here.
 class Categories(models.Model):
@@ -10,6 +12,12 @@ class Categories(models.Model):
     
     def get_all_category(self):
         return Categories.objects.all().order_by('id')
+    
+class Level(models.Model):
+    name = models.CharField(max_length=100)
+     
+    def __str__(self):
+        return self.name
     
 class Author(models.Model):
     author_profile = models.ImageField(upload_to="author")
@@ -31,6 +39,7 @@ class Course(models.Model):
     created_at = models.DateField(auto_now_add=True)
     author = models.ForeignKey(Author,on_delete=models.CASCADE,null=True)
     category = models.ForeignKey(Categories,on_delete=models.CASCADE)
+    level = models.ForeignKey(Level,on_delete=models.CASCADE,null=True)
     description = models.TextField()
     price = models.IntegerField(null=True,default=0)
     discount = models.IntegerField(null=True)
@@ -47,3 +56,29 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse("course_details", kwargs={'slug': self.slug})
+    
+
+def create_slug(instance, new_slug=None):
+    slug = slugify(instance.title)
+    if new_slug is not None:
+        slug = new_slug
+    qs = Course.objects.filter(slug=slug).order_by('-id')
+    exists = qs.exists()
+    if exists:
+        new_slug = "%s-%s" % (slug, qs.first().id)
+        return create_slug(instance, new_slug=new_slug)
+    return slug
+
+
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = create_slug(instance)
+
+pre_save.connect(pre_save_post_receiver, Course)
+
+class NewsLetterReceiver(models.Model):
+    email = models.EmailField()

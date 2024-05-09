@@ -20,9 +20,12 @@ def Home(request):
 @login_required
 def Single_Course(request):
     category = Categories.get_all_category(Categories)
-
+    level = Level.objects.all()
+    course = Course.objects.all()
     context = {
         'category': category,
+        'level': level,
+        'course': course,
     }
     return render(request, 'Main/single_course.html',context)
 
@@ -31,3 +34,6 @@ def About_Us(request):
 
 def Contact_Us(request):
     return render(request, 'Main/contact_us.html')
+
+def Course_Details(request,slug):
+    return render(request, 'course/course_details.html')

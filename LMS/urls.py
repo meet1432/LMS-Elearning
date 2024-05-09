@@ -25,6 +25,7 @@ urlpatterns = [
     path('base/',views.Base,name="base"),
     path('',views.Home,name="home"),
     path('courses/',views.Single_Course,name="course"),
+    path('courses/<slug:slug>',views.Course_Details,name="course_details"),
     path('about_us/',views.About_Us,name="about_us"),
     path('contact_us/',views.Contact_Us,name="contact_us"),
     path('accounts/register/',user_login.Register,name = "register"),
@@ -35,3 +36,5 @@ urlpatterns = [
     path('accounts/profile/update',user_login.Profile_update,name="profile_update"),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
