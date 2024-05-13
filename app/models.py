@@ -1,8 +1,16 @@
 from django.db import models
 from django.utils.text import slugify
 from django.db.models.signals import pre_save
+from django.contrib.auth.models import AbstractUser
+
 
 # Create your models here.
+# class User(AbstractUser):
+#     profile_photo = models.ImageField(upload_to='profile-photo')
+
+#     USERNAME_FIELD = 'username'
+#     REQUIRED_FIELDS = []
+
 class Categories(models.Model):
     icon = models.CharField(max_length=50,null=True)
     name = models.CharField(max_length=50)
@@ -49,7 +57,7 @@ class Course(models.Model):
     def get_current_price(self,price,discount):
         self.discount = discount
         self.price = price
-        if self.discount is None or self.discount is 0:
+        if self.discount is None or self.discount == 0:
             return self.price 
         else:
             return self.price - (self.price * (self.discount/100))
@@ -82,3 +90,23 @@ pre_save.connect(pre_save_post_receiver, Course)
 
 class NewsLetterReceiver(models.Model):
     email = models.EmailField()
+
+class Lesson(models.Model):
+    course = models.ForeignKey(Course,on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name+"--"+self.course.title
+    
+class Video(models.Model):
+    serial_number = models.IntegerField(null=True)
+    thumbnail = models.ImageField(upload_to="thumbnail",null=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    youtube_id = models.CharField(max_length=200)
+    time_durations = models.FloatField(null =True)
+    preview = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title

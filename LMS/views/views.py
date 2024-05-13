@@ -30,10 +30,31 @@ def Single_Course(request):
     return render(request, 'Main/single_course.html',context)
 
 def About_Us(request):
-    return render(request, 'Main/about_us.html')
+    category = Categories.get_all_category(Categories)
+    
+    context = {
+        'category': category,
+    }
+    return render(request, 'Main/about_us.html',context)
 
 def Contact_Us(request):
-    return render(request, 'Main/contact_us.html')
+    category = Categories.get_all_category(Categories)
+
+    context = {
+        'category': category,
+    }
+    return render(request, 'Main/contact_us.html',context)
 
 def Course_Details(request,slug):
-    return render(request, 'course/course_details.html')
+    course = Course.objects.filter(slug = slug)
+    if course.exists():
+        course = course.first()
+    else:
+        return redirect('404')
+    context = {
+        'course': course,
+    }
+    return render(request, 'course/course_details.html',context)
+
+def PageNotFound(request):
+    return render(request, '404.html')
